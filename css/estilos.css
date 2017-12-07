@@ -1,17 +1,20 @@
 body
 {
-    background: whitesmoke;
-    color: black;
-    margin:0;
+    background: rgb(27, 25, 25);
+    color: whitesmoke;
+    font-family: Helvetica;
+    margin-top: 0px;
+    margin-bottom: 100px;
+    margin-right: 370px;
+    margin-left: 370px;
     padding: 0;
 }
 h1
 {
-    background: rgb(47, 3, 151);
+    background: rgb(14, 12, 19);
     font-size: 100px;
     margin:0;
     padding: 0;
-
 }
 /*estilo de las tabs*/
 .tabs
@@ -19,7 +22,6 @@ h1
     overflow: hidden;
     border: 1px solid #ccc;
     background-color: #f1f1f1;
-
 }
 .tabs button 
 {
@@ -34,9 +36,40 @@ h1
 .tabs button:hover {
     background-color: #ddd;
 }
-
-
 .tabs button.active {
     background-color: #ccc;
 }
 /*termina estilo de las tabs*/
+.botones 
+{
+    padding: 0;
+    margin-top: 60px;
+    margin-left: 120px;
+}
+.boton
+{
+    border: 1px solid #ccc;
+    background-color: #f1f1f1;
+    margin-left: 25px;
+    float: left;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+    border-radius: 10%;
+}
+h2
+{
+    margin-bottom: 0px;
+    font-size: 30px;
+
+}
+input
+{
+    border-radius: 5%;
+    font-size: 20px;
+}
+.formulario
+{
+    margin-left: 70px;
+}
