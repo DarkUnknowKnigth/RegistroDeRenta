@@ -3,14 +3,16 @@
     <head>
         <meta charset="utf-8">
         <title>Registro de cobros de renta</title>   
-        <link rel="stylesheet" href="estilos.css">
+        <link rel="stylesheet" href="css/estilos.css">
+        <script src="jq/jquery.js"></script>
     </head>
     <body>
-        <div id="tabs">
-            <button>ingreso</button>
-            <button>Registro</button>
+        <h1>Mis Ingresos</h1>
+        <div class="tabs">
+            <button>Registrar cobro</button>
+            <button>historial de pagos</button>
         </div>
-        <div id="form">
+        <div class="formulario">
             <form action="POST">
                 <h2>Propietario</h2>
                 <h3>nombre</h3>
@@ -22,15 +24,16 @@
                 <input type="text">
                 <h3>apellido</h3>
                 <input type="text">
-                <h2>Cobro</h2>
+                <h2>Pago</h2>
+                <h3>monto</h3>
                 <input type="number">
-
-            </form>
-            
+                <h3>Fecha</h3>
+                <input type="text" id="datapicker">
+            </form> 
         </div>
         <div id="query">
-
+            
         </div>
-        <script src="accion.js"></script>
+        <script src="js/accion.js"></script>
     </body>
 </html>
