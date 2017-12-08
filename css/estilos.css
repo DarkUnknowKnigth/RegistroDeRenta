@@ -2,11 +2,7 @@ body
 {
     background: rgb(27, 25, 25);
     color: whitesmoke;
-    font-family: Helvetica;
-    margin-top: 0px;
-    margin-bottom: 100px;
-    margin-right: 370px;
-    margin-left: 370px;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     padding: 0;
 }
 h1
@@ -32,6 +28,7 @@ h1
     cursor: pointer;
     padding: 14px 16px;
     transition: 0.3s;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 .tabs button:hover {
     background-color: #ddd;
@@ -42,7 +39,6 @@ h1
 /*termina estilo de las tabs*/
 .botones 
 {
-    padding: 0;
     margin-top: 60px;
     margin-left: 120px;
 }
@@ -50,7 +46,7 @@ h1
 {
     border: 1px solid #ccc;
     background-color: #f1f1f1;
-    margin-left: 25px;
+    margin-left: 15px;
     float: left;
     outline: none;
     cursor: pointer;
@@ -62,14 +58,30 @@ h2
 {
     margin-bottom: 0px;
     font-size: 30px;
-
 }
 input
 {
     border-radius: 5%;
     font-size: 20px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 .formulario
 {
-    margin-left: 70px;
+    
+    width: 600px;
+    height: 400px;
+    margin: auto;
+    background: black;
+    border-radius: 5px;
+}
+.query
+{
+    width: 900px;
+    height: 500px;
+    background: black;
+    margin:auto;
+}
+form
+{
+    margin-left: 40px;
 }

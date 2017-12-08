@@ -13,10 +13,10 @@
             <h1>Mis Ingresos</h1>
         </div>
         <div class="tabs">
-            <button>Registrar cobro</button>
-            <button>Historial de pagos</button>
+            <button id="ingreso" class="btn tablinks">Registrar cobro</button>
+            <button id="consulta" class="btn tablinks">Historial de pagos</button>
         </div>
-        <div class="formulario">
+        <div class="formulario tabcontent" id="reg" >
             <form action="POST">
                 <h2>Propietario</h2>
                 <input type="text" placeholder="Nombre">
@@ -33,7 +33,15 @@
                 </div>
             </form> 
         </div>
-        <div id="query">
+        <div class="query tabcontent" id="resp">
+            <table>
+                <tr>
+                    <th>Propietario</th>
+                    <th>Inquilino</th>
+                    <th>Monto</th>
+                    <th>fecha</th>
+                </tr>
+            </table>
             
         </div>
         <script src="js/accion.js"></script>
