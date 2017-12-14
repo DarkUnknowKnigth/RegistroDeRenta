@@ -1,13 +1,16 @@
+.tabcontent{
+    display: none;
+}
 body
 {
-    background: rgb(27, 25, 25);
+    background-color: rgb(27, 25, 25);
     color: whitesmoke;
     font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     padding: 0;
 }
 h1
 {
-    background: rgb(14, 12, 19);
+    background-color: rgb(14, 12, 19);
     font-size: 100px;
     margin:0;
     padding: 0;
@@ -21,6 +24,7 @@ h1
 }
 .tabs button 
 {
+    font-size: 20px;
     background-color: inherit;
     float: left;
     border: none;
@@ -79,9 +83,16 @@ input
     width: 900px;
     height: 500px;
     background: black;
-    margin:auto;
+    margin-top: 20px;
 }
 form
 {
     margin-left: 40px;
+}
+table th td{
+    border: 1px solid white;
+}
+#error{
+    margin-left: 600px;
+    color: red;
 }

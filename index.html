@@ -10,31 +10,34 @@
     </head>
     <body>
         <div class="tit">
-            <h1>Mis Ingresos</h1>
+            <h1>Cobro * Inquilino</h1>
         </div>
         <div class="tabs">
             <button id="ingreso" class="btn tablinks">Registrar cobro</button>
             <button id="consulta" class="btn tablinks">Historial de pagos</button>
         </div>
         <div class="formulario tabcontent" id="reg" >
-            <form action="POST">
+            <form method="POST" >
                 <h2>Propietario</h2>
-                <input type="text" placeholder="Nombre">
-                <input type="text" placeholder="Apellido">
+                <input type="text" placeholder="Nombre" class="texto" id="np" required>
+                <input type="text" placeholder="Apellido" class="texto" id="ap" required>
                 <h2>Inquilino</h2>
-                <input type="text" placeholder="Nombre">
-                <input type="text" placeholder="Apellido">
+                <input type="text" placeholder="Nombre" class="texto" id="in">
+                <input type="text" placeholder="Apellido" class="texto" id="ia">
                 <h2>Pago</h2>
-                <input type="number" placeholder="Monto">
-                <input type="text" id="datepicker" placeholder="Fecha" >
+                <input type="number" placeholder="Monto" id="monto" step="0.01" required>
+                <input type="text" id="datepicker" placeholder="Fecha" id="fecha">
                 <div class="botones">
-                    <input type="submit" value="Almacenar" class="boton">
-                    <input type="reset" value="Vaciar" class="boton">
+                    <input type="submit" value="registrar" class="boton" id="submit">
+                    <input type="reset" value="Vaciar" class="boton" id="reset">
                 </div>
             </form> 
         </div>
+        <div class ="mensaje">
+            <label id="error"></label>
+        </div>
         <div class="query tabcontent" id="resp">
-            <table>
+            <table border="1">
                 <tr>
                     <th>Propietario</th>
                     <th>Inquilino</th>
