@@ -10,23 +10,25 @@
     </head>
     <body>
         <div class="tit">
-            <h1>Cobro * Inquilino</h1>
+            <h1>Mis Bienes Raices</h1>
         </div>
         <div class="tabs">
-            <button id="ingreso" class="btn tablinks">Registrar cobro</button>
-            <button id="consulta" class="btn tablinks">Historial de pagos</button>
+            <button id="ingreso" class="btn tablinks">Registrar renta</button>
+            <button id="transaccion" class="btn tablinks">Cobros</button>
+            <button id="cliente" class="btn tablinks">Clientes</button>
+            <button id="propietario" class="btn tablinks">Propietarios</button>
         </div>
         <div class="formulario tabcontent" id="reg" >
-            <form>
+            <form id="form1">
                 <h2>Propietario</h2>
                 <input type="text" placeholder="Nombre" class="texto" id="np" required>
                 <input type="text" placeholder="Apellido" class="texto" id="ap" required>
                 <h2>Inquilino</h2>
-                <input type="text" placeholder="Nombre" class="texto" id="in">
-                <input type="text" placeholder="Apellido" class="texto" id="ia">
+                <input type="text" placeholder="Nombre" class="texto" id="in" required>
+                <input type="text" placeholder="Apellido" class="texto" id="ia" required>
                 <h2>Pago</h2>
                 <input type="number" placeholder="Monto" id="monto" step="0.01" required>
-                <input type="text" id="datepicker" placeholder="Fecha" id="fecha">  
+                <input type="text" id="datepicker" placeholder="Fecha">  
             </form> 
             <div class="botones">
                 <input type="submit" value="registrar" class="boton" id="submit">
@@ -36,13 +38,34 @@
         <div class ="mensaje">
             <label id="error"></label>
         </div>
-        <div class="query tabcontent" id="resp">
-            <table border="1">
+        <div class="query tabcontent" id="pago">
+            <table border="1" id ="transacciones">
                 <tr>
+                    <th>Id</th>
                     <th>Propietario</th>
                     <th>Inquilino</th>
                     <th>Monto</th>
                     <th>fecha</th>
+                </tr>
+            </table>
+            
+        </div>
+        <div class="query tabcontent" id="cli">
+            <table border="1" id="clientes">
+                <tr>
+                    <th>Id</th>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                </tr>
+            </table>
+            
+        </div>
+        <div class="query tabcontent" id="pro">
+            <table border="1" id="propietarios">
+                <tr>
+                    <th>Id</th>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
                 </tr>
             </table>
             
