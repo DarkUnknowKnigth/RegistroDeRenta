@@ -9,6 +9,7 @@ function set_load()
 {
     t_nom=false;
     t_numero=false;
+    error.html("").css("color")
     $("#datepicker").datepicker({dateFormat: "yy-mm-dd"});
     $("#ingreso").click(function(event){change(event,"reg");});
     $("#consulta").click(function(event){change(event,"resp");});
@@ -21,7 +22,7 @@ function set_load()
 }
 /*--------------funcion de tabs------------------------*/
 function change(event,id){
-    var tabcontent, tablinks;
+    var tabcontent,tablinks;
     tabcontent = $(".tabcontent");
     for (i = 0; i < tabcontent.length; i++) 
     {
@@ -87,28 +88,31 @@ function valida_f()
     {
         var parametros={
             "pnombre":$("#np").val(),
-            "papellido":$("ap").val(),
+            "papellido":$("#ap").val(),
             "inombre":$("#in").val(),
             "iapellido":$("#ai").val(),
             "monto":$("#monto").val(),
             "fecha":$("#fecha").val()
         }
-        var send=$.post("php/index.php",
-        parametros).done(function( data )
-        {
-            $("#error").css("color","#009933").html("Registro enviado correctamente");
-        }).fail(function(data){
-            $("#error").css("color","#ff0000").html("No se pudo enviar el registro");
-
-        });
-        console.log(send);
+        jQuery.ajax({
+            data:parametros,
+            url:'php/index.php',
+            type:'POST',
+            beforeSend: function(){
+                error.html("Procesando").css("color","E64320");
+            },
+            success: function(r){
+                error.html("Registro exitos").css("color","0E9933");
+                console.log(r);
+            }
+        }
+        );
         set_load();
         return true;
     }
     else
     {    
         error.text("Campos invalidos o vacios");
-        t_nom=false;
         return false;
     }
 }

@@ -84,12 +84,15 @@ input
     height: 500px;
     background: black;
     margin-top: 20px;
+    margin-left: 200px;
 }
 form
 {
     margin-left: 40px;
 }
 table th td{
+    font-size: 12px;
+    font-family: Arial;
     border: 1px solid white;
 }
 #error{

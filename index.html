@@ -17,7 +17,7 @@
             <button id="consulta" class="btn tablinks">Historial de pagos</button>
         </div>
         <div class="formulario tabcontent" id="reg" >
-            <form method="POST" >
+            <form>
                 <h2>Propietario</h2>
                 <input type="text" placeholder="Nombre" class="texto" id="np" required>
                 <input type="text" placeholder="Apellido" class="texto" id="ap" required>
@@ -26,12 +26,12 @@
                 <input type="text" placeholder="Apellido" class="texto" id="ia">
                 <h2>Pago</h2>
                 <input type="number" placeholder="Monto" id="monto" step="0.01" required>
-                <input type="text" id="datepicker" placeholder="Fecha" id="fecha">
-                <div class="botones">
-                    <input type="submit" value="registrar" class="boton" id="submit">
-                    <input type="reset" value="Vaciar" class="boton" id="reset">
-                </div>
+                <input type="text" id="datepicker" placeholder="Fecha" id="fecha">  
             </form> 
+            <div class="botones">
+                <input type="submit" value="registrar" class="boton" id="submit">
+                <input type="reset" value="Vaciar" class="boton" id="reset">
+            </div>
         </div>
         <div class ="mensaje">
             <label id="error"></label>
