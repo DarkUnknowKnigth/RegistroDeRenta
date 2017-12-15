@@ -1,18 +1,26 @@
 //carga los componentes y valores
 //variables
 var ingreso=$("#ingreso");
-var consulta=$("#consulta");
+var consulta=$("#transaccion");
 var t_numero=false,t_nom=false;
 var error=$("#error");
 /*-----configuracion de los componentes iniciales----*/
 function set_load()
-{
+{   
     t_nom=false;
     t_numero=false;
-    error.html("").css("color")
     $("#datepicker").datepicker({dateFormat: "yy-mm-dd"});
     $("#ingreso").click(function(event){change(event,"reg");});
-    $("#consulta").click(function(event){change(event,"resp");});
+    $("#transaccion").click(function(event){
+        change(event,"pago");
+
+    });
+    $("#cliente").click(function(event){
+        change(event,"cli");
+    });
+    $("#propietario").click(function(event){
+        change(event,"pro");
+    });
     $("#submit").click(function(e)
     {
         (valida_f())?(console.log("se valido")):(e.preventDefault());
@@ -62,7 +70,8 @@ function test_numero(evento)
             error.text("Solo numeros");
         }
     }
-}//probar texto de todos los campos 
+}
+//probar texto de todos los campos 
 function test_nom(nombre)
 {
     for(var i=0;i<nombre.length;i++)
@@ -90,32 +99,57 @@ function valida_f()
             "pnombre":$("#np").val(),
             "papellido":$("#ap").val(),
             "inombre":$("#in").val(),
-            "iapellido":$("#ai").val(),
+            "iapellido":$("#ia").val(),
             "monto":$("#monto").val(),
-            "fecha":$("#fecha").val()
+            "fecha":$("#datepicker").val()
         }
-        jQuery.ajax({
+        //envio de informacion post
+        $.ajax({
             data:parametros,
-            url:'php/index.php',
+            url:'php/insert.php',
             type:'POST',
             beforeSend: function(){
-                error.html("Procesando").css("color","E64320");
+                error.html("Procesando").css("color","yellow");
             },
-            success: function(r){
-                error.html("Registro exitos").css("color","0E9933");
-                console.log(r);
+            success: function(respuesta){
+                error.html("Registro exito").css("color","green");
+                //error.html(respuesta);
+            },
+            error: function(respuesta){
+                error.html("Error en la peticion").css("color","red");
+                error.html(respuesta);
             }
         }
         );
-        set_load();
+        //reset valores
+        vaciar()
         return true;
     }
     else
     {    
-        error.text("Campos invalidos o vacios");
+        error.text("Campos invalidos").css("color","red");
         return false;
     }
 }
+//vaciar
+function vaciar()
+{
+    t_nom=false;
+    t_numero=false;
+    error.html("").css("color","red");
+    $("#np").val("");
+    $("#ap").val("");
+    $("#in").val("");
+    $("#ia").val("");
+    $("#monto").val("");
+    $("#datepicker").val("");
+
+}
+/*---------------mostrar datos ingresados----------*/
+function llenar(tabla)
+{
+    
+} 
 /*-----------carga de la funcionalidad------------*/
 $(document).ready(function(){
     if(jQuery)
