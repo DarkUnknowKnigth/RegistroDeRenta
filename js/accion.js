@@ -11,15 +11,19 @@ function set_load()
     t_numero=false;
     $("#datepicker").datepicker({dateFormat: "yy-mm-dd"});
     $("#ingreso").click(function(event){change(event,"reg");});
+    //llenado de tablas y mostrar tablas
     $("#transaccion").click(function(event){
+        llenar(3,"#tb_trans");
         change(event,"pago");
-
     });
     $("#cliente").click(function(event){
+        llenar(2,"#tb_inqui");
         change(event,"cli");
     });
     $("#propietario").click(function(event){
+        llenar(1,"#tb_prop");
         change(event,"pro");
+        
     });
     $("#submit").click(function(e)
     {
@@ -113,6 +117,8 @@ function valida_f()
             },
             success: function(respuesta){
                 error.html("Registro exito").css("color","green");
+                for(i=0;i<1000;i++)
+                vaciar();
                 //error.html(respuesta);
             },
             error: function(respuesta){
@@ -122,7 +128,6 @@ function valida_f()
         }
         );
         //reset valores
-        vaciar()
         return true;
     }
     else
@@ -146,9 +151,20 @@ function vaciar()
 
 }
 /*---------------mostrar datos ingresados----------*/
-function llenar(tabla)
+function llenar(tabla,donde)
 {
-    
+    $.ajax({
+        data:{"numero":tabla},
+        url:'php/get.php',
+        type:'POST',
+        success: function(respuesta){
+            $(donde).html(respuesta);
+        },
+        error: function(respuesta){
+            error.html("no se puedo realizar la consulta");
+        }
+
+    });   
 } 
 /*-----------carga de la funcionalidad------------*/
 $(document).ready(function(){
