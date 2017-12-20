@@ -1,6 +1,9 @@
 .tabcontent{
     display: none;
 }
+.formulario_m ,#disp_p ,#disp_i, #disp_t{
+    display: none;
+}
 body
 {
     background-color: rgb(27, 25, 25);
@@ -80,11 +83,9 @@ input
 }
 .query
 {
-    width: 900px;
-    height: 500px;
-    background: black;
-    margin-top: 20px;
-    margin-left: 200px;
+    background:white;
+    color: black;
+    margin-top: 0;
 }
 form
 {
@@ -93,9 +94,32 @@ form
 table{
     font-size: 12px;
     font-family: Arial;
-    border: 1px solid white;
 }
 #error{
     margin-left: 600px;
     color: red;
+}
+.tabs2 button
+{
+    font-size: 20px;
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+.tabs2 button:hover
+{
+    background-color: #ddd;
+}
+.tabs2 button.active
+{
+    background-color: #ccc;
+}
+.boton_
+{
+    margin-left: 40px ;
 }

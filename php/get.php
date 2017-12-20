@@ -4,15 +4,15 @@
     //checar conexion
     if ($lnk->connect_error) 
     {
-        die("Connection failed: ".$conn->connect_error);
+        die("Connection failed: ".$lnk->connect_error);
     } 
     //capturar datos;
     $consulta_n=$_POST['numero'];
-    
+    //llenado de tabla
     switch($consulta_n)
     {
         case 1:
-            $sql = "SELECT idpropietario,nombre,apellido FROM propietario";
+            $sql = "SELECT idpropietario,nombre,apellido FROM propietario ORDER BY idpropietario";
             $result = $lnk->query($sql);
             $tabla="";
             if ($result->num_rows > 0) 
@@ -21,12 +21,13 @@
                 while($row = $result->fetch_assoc()) 
                 {
                     $tabla.= 
-                    "<tr>
+                    "<tr id=trp_".$row["idpropietario"].">
                     <td>".$row["idpropietario"]."</td>
                     <td>".$row["nombre"]."</td>
                     <td>".$row["apellido"]."</td>
-                    <td><button>modificar</button></td>
-                    <td><button>borrar</button></td>
+                    <td class="."col-auto mr-auto".">
+                        <input type= 'radio' class='btnp_m_' name='rowp' value='".$row["idpropietario"]."'>
+                    </td>
                     </tr>";
                 }
                 echo $tabla;
@@ -38,7 +39,7 @@
                 break;
             }
         case 2:
-            $sql = "SELECT idinquilino,nombre,apellido FROM inquilino";
+            $sql = "SELECT idinquilino,nombre,apellido FROM inquilino ORDER BY idinquilino";
             $result = $lnk->query($sql);
             $tabla="";
             if ($result->num_rows > 0) 
@@ -47,12 +48,13 @@
                 while($row = $result->fetch_assoc()) 
                 {
                     $tabla.= 
-                    "<tr>
+                    "<tr id=tri_".$row["idinquilino"].">
                     <td>".$row["idinquilino"]."</td>
                     <td>".$row["nombre"]."</td>
                     <td>".$row["apellido"]."</td>
-                    <td><button>modificar</button></td>
-                    <td><button>borrar</button></td>
+                    <td>
+                        <input type= 'radio' class='btni_m_ ' name='rowi' value='".$row["idinquilino"]."'>
+                    </td>
                     </tr>";
                 }
                 echo $tabla;
@@ -66,13 +68,15 @@
         case 3:
             $sql = "SELECT 
             transaccion.idpago as ID,
-            propietario.nombre as NP,propietario.apellido as AP,
-            inquilino.nombre as NI, inquilino.apellido as AI,
+            propietario.nombre as NP,
+            propietario.apellido as AP,
+            inquilino.nombre as NI, 
+            inquilino.apellido as AI,
             transaccion.monto as M,
             transaccion.fecha as F 
             FROM transaccion,propietario,inquilino 
             WHERE transaccion.idpropietario=propietario.idpropietario 
-            AND transaccion.idinquilino =inquilino.idinquilino";
+            AND transaccion.idinquilino =inquilino.idinquilino ORDER BY ID ";
             $result = $lnk->query($sql);
             $tabla="";
             if ($result->num_rows > 0) 
@@ -81,14 +85,15 @@
                 while($row = $result->fetch_assoc()) 
                 {
                     $tabla.= 
-                    "<tr id=".$row["ID"].">
+                    "<tr id=trt_".$row["ID"].">
                     <td>".$row["ID"]."</td>
                     <td>".$row["NP"]." ".$row["AP"]."</td>
                     <td>".$row["NI"]." ".$row["AI"]."</td>
                     <td>$ ".$row["M"]."</td>
                     <td>".$row["F"]."</td>
-                    <td><button>modificar</button></td>
-                    <td><button>borrar</button></td>
+                    <td class='col-s mr-auto'>
+                        <input type= 'radio' class='btnt_m_' name='rowt' value='".$row["ID"]."'>
+                    </td>
                     </tr>";
                 }
                 echo $tabla;
@@ -98,14 +103,10 @@
             {
                 echo "0 results";
                 break;
-            }
-            
+            }       
         default :
             echo 'ha ocurrido un error ';
-        break;
+            break;
     }
-    
-  
     $lnk->close();
-
 ?>

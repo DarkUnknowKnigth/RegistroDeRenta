@@ -2,6 +2,7 @@
 <html>
     <head>
         <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Registro de cobros de renta</title>   
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
         <link rel="stylesheet" href="css/estilos.css">
@@ -13,80 +14,117 @@
         <div class="tit">
             <h1>Mis Bienes Raices</h1>
         </div>
+        <div class="bd">
         <div class="tabs">
             <button id="ingreso" class="btn tablinks">Registrar renta</button>
             <button id="transaccion" class="btn tablinks">Cobros</button>
             <button id="cliente" class="btn tablinks">Clientes</button>
             <button id="propietario" class="btn tablinks">Propietarios</button>
         </div>
-        <div class="formulario tabcontent" id="reg" >
-            <form id="form1" class="form-horizontal">
-                <h2>Propietario</h2>
-                <input type="text" placeholder="Nombre" class="texto" id="np" required>
-                <input type="text" placeholder="Apellido" class="texto" id="ap" required>
-                <h2>Inquilino</h2>
-                <input type="text" placeholder="Nombre" class="texto" id="in" required>
-                <input type="text" placeholder="Apellido" class="texto" id="ia" required>
-                <h2>Pago</h2>
-                <input type="number" placeholder="Monto" id="monto" step="0.01" required>
-                <input type="text" id="datepicker" placeholder="Fecha">  
-            </form > 
-            <div class="botones">
-                <input type="submit" value="registrar" class="boton" id="submit">
-                <input type="reset" value="Vaciar" class="boton" id="reset">
+        <div class="container">
+            <div class="formulario tabcontent" id="reg" >
+                <form id="form1" class="form-horizontal">
+                    <h2>Propietario</h2>
+                    <input type="text" placeholder="Nombre" class="texto" id="np" required>
+                    <input type="text" placeholder="Apellido" class="texto" id="ap" required>
+                    <h2>Inquilino</h2>
+                    <input type="text" placeholder="Nombre" class="texto" id="in" required>
+                    <input type="text" placeholder="Apellido" class="texto" id="ia" required>
+                    <h2>Pago</h2>
+                    <input type="number" placeholder="Monto" id="monto" step="0.01" required>
+                    <input type="text" id="datepicker" placeholder="Fecha">  
+                </form > 
+                <div class="botones">
+                    <input type="submit" value="registrar" class="boton" id="submit">
+                    <input type="reset" value="Vaciar" class="boton" id="reset">
+                </div>
             </div>
-        </div>
-        <div class ="mensaje">
-            <label id="error"></label>
-        </div>
-        <div class="query tabcontent" id="pago">
-            <table border="1" id ="transacciones" class="table table-striped table-bordered">
-                <thead>
-                    <tr>
-                        <th>Id</th>
-                        <th>Propietario</th>
-                        <th>Inquilino</th>
-                        <th>Monto</th>
-                        <th>fecha</th>
-                        <th>#</th>
-                        <th>-</th>
-                    </tr>
-                </thead>
-                <tbody id="tb_trans">
+            <div class="formulario_m container" id="form_mod" title="Modificar">
+                <form class="form-horizontal" id="form2">
+                    <div id="disp_p" class="modif">
+                        <h2>Propietario</h2>
+                        <input type="text" class="tex" id="np_m" required>
+                        <input type="text" class="tex" id="ap_m" required>
+                    </div>
+                    <div id="disp_i" class="modif">
+                        <h2>Inquilino</h2>
+                        <input type="text" class="tex" id="in_m" required>
+                        <input type="text" class="tex" id="ia_m" required>
+                    </div>
+                    <div id="disp_t" class="modif">
+                        <h2>Pago</h2>
+                        <input type="number" id="monto_m" step="0.01_m" required>
+                        <input type="text" id="datepicker_m">
+                    </div>  
+                </form>
+                    <button class="boton_" id="registrar_m">Modificar</button>
+                    <button class="boton_" id="cancelar_m">Cancelar</button>
+            </div>
+            <div class="query tabcontent container" id="pago">
+                <div class="tabs2">
+                    <button id="modf_trans" class="btn">Modificar</button>
+                    <button id="elim_trans" class="btn">Eliminar</button>
+                </div>
+                <table border="1" id ="transacciones" class="table table-striped table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Propietario</th>
+                            <th>Inquilino</th>
+                            <th>Monto</th>
+                            <th>fecha</th>
+                            <th class="sel">seleccionar</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tb_trans">
 
-                </tbody>
-            </table>
-            
-        </div>
-        <div class="query tabcontent" id="cli">
-            <table border="1" id="clientes" class="table table-striped table-bordered">
-                <thead>
-                    <tr>
-                        <th>Id</th>
-                        <th>Nombre</th>
-                        <th>Apellido</th>
-                    </tr>
-                </thead>
-                <tbody id="tb_inqui">
-                    
-                </tbody>
-            </table>
-            
-        </div>
-        <div class="query tabcontent" id="pro">
-            <table border="1" id="propietarios" class="table table-striped table-bordered">
-                <thead>
-                    <tr>
-                        <th>Id</th>
-                        <th>Nombre</th>
-                        <th>Apellido</th>
-                    </tr>
-                </thead>
-                <tbody id="tb_prop">
-                    
-                </tbody>
-            </table>
-            
+                    </tbody>
+                </table>
+                
+            </div>
+            <div class="query tabcontent container" id="cli">
+                <div class="tabs2">
+                    <button id="modf_inqui" class="btn">Modificar</button>
+                    <button id="elim_inqui" class="btn">Eliminar</button>
+                </div>
+                <table border="1" id="clientes" class="table table-striped table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Nombre</th>
+                            <th>Apellido</th>
+                            <th class="sel">selecionar</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tb_inqui">
+                        
+                    </tbody>
+                </table>
+                
+            </div>
+            <div class="query tabcontent container" id="pro">
+                <div class="tabs2">
+                    <button id="modf_prop" class="btn">Modificar</button>
+                    <button id="elim_prop" class="btn">Eliminar</button>
+                </div>
+                <table border="1" id="propietarios" class="table table-striped table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Nombre</th>
+                            <th>Apellido</th>
+                            <th class="sel">seleccionar</th>                        
+                        </tr>
+                    </thead>
+                    <tbody id="tb_prop">
+                        
+                    </tbody>
+                </table>
+                
+            </div>
+            <div class ="mensaje">
+                <label id="error"></label>
+            </div>
         </div>
         <script src="js/accion.js"></script>
     </body>
