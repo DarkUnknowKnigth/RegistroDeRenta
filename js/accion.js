@@ -1,8 +1,9 @@
-//falta hacer bien la validacion de cambios y ver que no se repitan los clientes
+//falta hacer bien la validacion de cambios y ver que no se repitan los inquilinos
 //implementar una pregunta de eliminar tambien inquilinos y propietarios? cuando de elimina un cobro
 //carga los componentes y valores
 //variables
 var r="no";
+var m=null;
 var ingreso=$("#ingreso");
 var consulta=$("#transaccion");
 var t_numero=false,t_nom=false;
@@ -45,6 +46,22 @@ function set_load()
 {  
     t_nom=false;
     t_numero=false;
+    $("#si").click(()=>{
+        var f=boton_p("t");
+        console.log("se realizo la eliminacion de el inquilino,propietario y transaccion");
+        delQuery(f.id,"transaccion","delete");
+        delQuery($('td[name=id_p]')[f.position].id,"propietario","delete");
+        delQuery($('td[name=id_i]')[f.position].id,"inquilino","delete");
+        $("#alert_transacciones").dialog("close");
+        $("#transaccion").click();
+    });
+    $("#no").click(()=>{
+        f=boton_p("t");
+        console.log("no se elimino el inquilino ni el propietario");
+        delQuery(f.id,"transaccion","delete");
+        $("#transaccion").click();
+        $("#alert_transacciones").dialog("close");
+    });
     $("#datepicker_m").datepicker({dateFormat:"yy-mm-dd"});
     $("#datepicker").datepicker({dateFormat: "yy-mm-dd"});
     $("#ingreso").click((event)=>{change(event,"reg");});
@@ -60,35 +77,45 @@ function set_load()
     /*-------modificar tabla de transaccion------*/
     $("#modf_trans").click((e)=>{ 
         //solicitar el id del campo selecionado
-        var id=boton_p("t");
-        var consulta="";
-        //sacar los datos de la bd en u json
-        if(id!=undefined)
-        {
-            $(".sel").css({"color":"black","font-size":"12px"});
-            getQuery(id,"transaccion","request");
-            // jalar el json de datos actuales
-            var json=JSON.parse(r);
-            //poner los valores actuales
-            $("#monto_m").val(json.monto);
-            $("#datepicker_m").val(json.fecha);
-            //mostrar los campos permitidos
-            $("#form_mod").css("display","block").dialog();
-            //comprobar registro 
-        }
-        else
+        var f=boton_p("t");
+        console.log(f)
+        if(f==undefined)
         {
             $(".sel").css({"color":"red","font-size":"15px"});
             e.preventDefault();
-        }    
+        }
+        else
+        {    
+            var consulta="";
+            console.log("estoy adentro");
+            console.log(f);
+            //sacar los datos de la bd en u json
+            if(f.id!=undefined)
+            {
+                $(".sel").css({"color":"black","font-size":"12px"});
+                getQuery(f.id,"transaccion","request");
+                // jalar el json de datos actuales
+                var json=JSON.parse(r);
+                //poner los valores actuales
+                $("#monto_m").val(json.monto);
+                $("#datepicker_m").val(json.fecha);
+                //mostrar los campos permitidos
+                $("#form_mod").css("display","block").dialog();
+                //comprobar registro 
+            }
+            else
+            {
+                $(".sel").css({"color":"yellow","font-size":"15px"});
+                e.preventDefault();
+            }  
+        }  
     });
     /*----------guardar los cambios de la transaccion----------------*/
     $("#registrar_m").click((e)=>{
-        console.log(whats_visible());
         switch(whats_visible())
         {
             case "disp_t":
-                var id=boton_p("t");
+                var id=boton_p("t").id;
                 if($("#monto_m").val()>0 && t_numero && $("#datepicker_m").length>0)
                 {
                     //modificar
@@ -98,7 +125,7 @@ function set_load()
                 }
                 else
                 {
-                    console.log("nel chavo");
+                    alert("no ha realizado una modificacion");
                     e.preventDefault();
                 }
             break;
@@ -110,11 +137,11 @@ function set_load()
                     //modificar
                     modQuery(id,"inquilino","update",{"inombre":$("#in_m").val(),"iapellido": $("#ia_m").val()});
                     $("#form_mod").dialog("close");
-                    $("#cliente").click();
+                    $("#inquilino").click();
                 }
                 else
                 {
-                    console.log("nel chavo");
+                    alert("no introdujo campos validos");
                     e.preventDefault();
                 }
             break;
@@ -130,7 +157,7 @@ function set_load()
                 }
                 else
                 {
-                    console.log("nel chavo");
+                    alert("no introdujo campos validos");
                     e.preventDefault();
                 }
             break;
@@ -141,23 +168,46 @@ function set_load()
     });
     /*-----------eliminar una transaccion ----------*/
     $("#elim_trans").click((e)=>{
-        var id=boton_p("t");
-        if(id!=undefined)
-        {
-            $(".sel").css({"color":"black","font-size":"12px"});
-            delQuery(id,"transaccion","delete");
-            $("#transaccion").click();
-        }
-        else
+        var f=boton_p("t");
+        if(f==undefined)
         {
             $(".sel").css({"color":"red","font-size":"15px"});
             e.preventDefault();
         }
+        else
+        {
+            if(f.id!=undefined)
+            {
+                $(".sel").css({"color":"black","font-size":"12px"});
+                $("#alert_transacciones").dialog().css("display","block");
+                console.log($('td[name=id_p]')[f.position].id);
+                console.log($('td[name=id_i]')[f.position].id);
+                // if(si && !($("#alert_transacciones").dialog("isOpen")))
+                // {
+                //     console.log("se realizo");
+                //     delQuery(f.id,"transaccion","delete");
+                //     delQuery($('td[name=id_p]')[f.position].id,"propietario","delete");
+                //     delQuery($('td[name=id_i]')[f.position].id,"inquilino","delete");
+                //     si=false;
+                // }
+                // else
+                // {
+                //     console.log("no se realizo");
+                //     delQuery(f.id,"transaccion","delete");
+                // }
+                // $("#transaccion").click();
+            }
+            else
+            {
+                $(".sel").css({"color":"red","font-size":"15px"});
+                e.preventDefault();
+            }
+        }
     });
     /*--------cancelar la modificacion de la transaccion----------*/
     $("#cancelar_m").click(()=>$("#form_mod").dialog("close"));
-    /*--------- funcion de cliente-----------*/
-    $("#cliente").click((event)=>{
+    /*--------- funcion de inquilino-----------*/
+    $("#inquilino").click((event)=>{
         novisible();
         // mostrar los datos que posee actualmente
         visible("disp_i");
@@ -196,7 +246,7 @@ function set_load()
         {
             $(".sel").css({"color":"black","font-size":"12px"});
             delQuery(id,"inquilino","delete");
-            $("#cliente").click();
+            $("#inquilino").click();
         }
         else
         {
@@ -275,7 +325,6 @@ function change(event,id){
 function test_numero(evento)
 {  
     {
-        console.log(t_numero);
         //verificar campos no permitidos
         if(evento.keyCode==69 || evento.keyCode==101 || evento.keyCode==45 || evento.keyCode==43) 
         {
@@ -404,7 +453,7 @@ function boton_p(btn){
             {  
                 if(botones[i].checked)
                 {
-                    return botones[i].value;
+                    return {"id":botones[i].value,"position":i}; 
                     break;
                 }
                 else
@@ -497,6 +546,8 @@ function modQuery(id,tabla,tipo,datos){
         break;
     }  
 }
+/*-----------buscador ---------------*/
+
 /*-------borrar un registro-------*/
 function delQuery(id,tabla,tipo){
     jQuery.ajax({
@@ -512,7 +563,6 @@ function delQuery(id,tabla,tipo){
 $(document).ready(()=>{
     if(jQuery)
     {
-        console.log("se cargo correctamente jQuery :D ");
         set_load();
     }
     else

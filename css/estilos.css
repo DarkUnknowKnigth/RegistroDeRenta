@@ -1,7 +1,7 @@
 .tabcontent{
     display: none;
 }
-.formulario_m ,#disp_p ,#disp_i, #disp_t{
+.formulario_m ,#disp_p ,#disp_i, #disp_t ,#alert_transacciones{
     display: none;
 }
 body
@@ -71,6 +71,14 @@ input
     border-radius: 5%;
     font-size: 20px;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+#combo
+{
+    margin-top: 10px;
+}
+#buscador
+{
+    margin-top: 10px;
 }
 .formulario
 {

@@ -68,6 +68,8 @@
         case 3:
             $sql = "SELECT 
             transaccion.idpago as ID,
+            propietario.idpropietario as ID_P,
+            inquilino.idinquilino as ID_I,
             propietario.nombre as NP,
             propietario.apellido as AP,
             inquilino.nombre as NI, 
@@ -87,8 +89,8 @@
                     $tabla.= 
                     "<tr id=trt_".$row["ID"].">
                     <td>".$row["ID"]."</td>
-                    <td>".$row["NP"]." ".$row["AP"]."</td>
-                    <td>".$row["NI"]." ".$row["AI"]."</td>
+                    <td id='".$row['ID_P']."' name='id_p'>".$row["NP"]." ".$row["AP"]."</td>
+                    <td id='".$row['ID_I']."' name='id_i'>".$row["NI"]." ".$row["AI"]."</td>
                     <td>$ ".$row["M"]."</td>
                     <td>".$row["F"]."</td>
                     <td class='col-s mr-auto'>

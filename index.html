@@ -17,8 +17,8 @@
         <div class="bd">
         <div class="tabs">
             <button id="ingreso" class="btn tablinks">Registrar renta</button>
-            <button id="transaccion" class="btn tablinks">Cobros</button>
-            <button id="cliente" class="btn tablinks">Clientes</button>
+            <button id="transaccion" class="btn tablinks">Transacciones</button>
+            <button id="inquilino" class="btn tablinks">Inquilinos</button>
             <button id="propietario" class="btn tablinks">Propietarios</button>
         </div>
         <div class="container">
@@ -35,7 +35,7 @@
                     <input type="text" id="datepicker" placeholder="Fecha">  
                 </form > 
                 <div class="botones">
-                    <input type="submit" value="registrar" class="boton" id="submit">
+                    <input type="submit" value="Registrar" class="boton" id="submit">
                     <input type="reset" value="Vaciar" class="boton" id="reset">
                 </div>
             </div>
@@ -64,6 +64,14 @@
                 <div class="tabs2">
                     <button id="modf_trans" class="btn">Modificar</button>
                     <button id="elim_trans" class="btn">Eliminar</button>
+                    <input  id="buscador" type="text" value="" class="btn" placeholder="Buscar">   
+                    <select id="combo" class="btn">
+                        <option value="-">Buscar por</option>
+                        <option value="propietario">Propietario</option>
+                        <option value="inquilino">Inquilino</option>
+                        <option value="monto">Monto</option>
+                        <option value="id">Id</option>
+                    </select> 
                 </div>
                 <table border="1" id ="transacciones" class="table table-striped table-bordered">
                     <thead>
@@ -124,6 +132,11 @@
             </div>
             <div class ="mensaje">
                 <label id="error"></label>
+            </div>
+            <div id="alert_transacciones">
+                <label id="del_all">Desea eliminar tambien los registros asociados (inquilino y propietario)</label>
+                <button id="si">si</button>
+                <button id="no">no</button>
             </div>
         </div>
         <script src="js/accion.js"></script>
