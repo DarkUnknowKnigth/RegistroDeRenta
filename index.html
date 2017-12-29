@@ -66,11 +66,12 @@
                     <button id="elim_trans" class="btn">Eliminar</button>
                     <input  id="buscador" type="text" value="" class="btn" placeholder="Buscar">   
                     <select id="combo" class="btn">
-                        <option value="-">Buscar por</option>
-                        <option value="propietario">Propietario</option>
-                        <option value="inquilino">Inquilino</option>
-                        <option value="monto">Monto</option>
-                        <option value="id">Id</option>
+                        <option class="opt" id="o_n" value="-" selected>Buscar por</option>
+                        <option class="opt" id="o_p" value="propietario">Propietario</option>
+                        <option class="opt" id="o_i" value="inquilino">Inquilino</option>
+                        <option class="opt" id="o_m" value="monto">Monto</option>
+                        <option class="opt" id="o_id" value="id">Id</option>
+                        <option class="opt" id="o_f" value="fecha">Fecha</option>
                     </select> 
                 </div>
                 <table border="1" id ="transacciones" class="table table-striped table-bordered">

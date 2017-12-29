@@ -1,5 +1,5 @@
 //falta hacer bien la validacion de cambios y ver que no se repitan los inquilinos
-//implementar una pregunta de eliminar tambien inquilinos y propietarios? cuando de elimina un cobro
+//hacer que el buscador cambie de tipo dependiendo del combobox
 //carga los componentes y valores
 //variables
 var r="no";
@@ -41,11 +41,108 @@ function novisible()
 {
     $(".modif").css("display","none");
 }
+
 /*-----configuracion de los componentes iniciales----*/
+
 function set_load()
 {  
     t_nom=false;
     t_numero=false;
+    
+    // /*---------modificar el cuadro de busqueda-------------*/
+    // $("#o_p").click(()=>{
+    //     console.log("le di click we");
+    //     $("#buscador").datepicker("destroy");
+    //     $("#buscador").attr('type','text');
+    // });
+    // $("#o_i").click(()=>{
+    //     $("#buscador").datepicker("destroy");
+    //     $("#buscador").attr("type","text");
+    // });
+    // $("#o_m").click(()=>{
+    //     $("#buscador").datepicker("destroy");
+    //     $("#buscador").attr('type','number');
+    // });
+    // $("#o_id").click(()=>{
+    //     $("#buscador").datepicker("destroy");
+    //     $("#buscador").attr("type","numbre");
+    // });
+    // $("#o_f").click(()=>{
+    //     $("#buscador").datepicker({dateFormat:"yy-mm-dd"});
+    // });
+    /*---------------modificar el cuadro de busqueda--------------------*/
+    $("#combo").change((e)=>{
+            $(".opt").css("background-color","white");
+            $("#buscador").datepicker("destroy").attr("type","text");
+            $(":selected").css("background-color","green");
+            var opcion=$("#combo :selected").val();
+            if(opcion=="propietario" || opcion=="inquilino")
+            {
+                $("#buscador").attr("type","text");
+            }
+            else if(opcion=="monto")
+            {
+                $("#buscador").attr({'type':'number','min':0,'step':0.01});
+            }
+            else if(opcion=="id")
+            {
+                $("#buscador").attr({'type':'number','min':0,'step':1});
+            }
+            else if(opcion=="fecha")
+            {
+                $("#buscador").datepicker({dateFormat:"yy-mm-dd"});
+            }
+            else{
+                alert("no se selecciono una opcion");
+            }
+    });
+    //buscador on type
+    console.log($("#combo option:selected").val());
+    $("#buscador").keyup((e)=>{
+        if($("#combo option:selected").val()!="-")
+        {
+            $.ajax(
+            {
+                data:{"palabra":$("#buscador").val(),"tipo":$("#combo option:selected").val()},
+                url:"php/search.php",
+                type:"POST",
+            }).done((e)=>
+            {
+                $("#tb_trans").html(e);
+            }).fail((e)=>
+            {
+                console.log("no se envio");
+            });
+        }
+        else
+        {
+            e.preventDefault();
+            alert("no selecciono un tipo de busqueda");
+            
+        }
+    }).change((e)=>{
+        if($("#combo option:selected").val()!="-")
+        {
+            $.ajax(
+            {
+                data:{"palabra":$("#buscador").val(),"tipo":$("#combo option:selected").val()},
+                url:"php/search.php",
+                type:"POST",
+            }).done((e)=>
+            {
+                $("#tb_trans").html(e);
+            }).fail((e)=>
+            {
+                console.log("no se envio");
+            });
+        }
+        else
+        {
+            e.preventDefault();
+            alert("no selecciono un tipo de busqueda");
+            
+        }
+    });
     $("#si").click(()=>{
         var f=boton_p("t");
         console.log("se realizo la eliminacion de el inquilino,propietario y transaccion");
@@ -73,6 +170,8 @@ function set_load()
         visible("disp_t");
         llenar(3,"#tb_trans");       
         change(event,"pago");
+        $("#combo").prop("selectedIndex",0);
+        $("#buscador").val("");
     });
     /*-------modificar tabla de transaccion------*/
     $("#modf_trans").click((e)=>{ 
@@ -303,8 +402,8 @@ function set_load()
     });
     $("#submit").click((e)=>{(valida_f())?(console.log("se valido")):(e.preventDefault());});
     $("#reset").click(vaciar);
-    $("#monto_m").click((e)=>{test_numero(e);}).prop("min",0).keypress(function(e){test_numero(e)});
-    $("#monto").click((e)=>{test_numero(e);}).prop("min",0).keypress(function(e){test_numero(e)});   
+    $("#monto_m").click((e)=>{test_numero(e);}).prop("min",0).keyup(function(e){test_numero(e)});
+    $("#monto").click((e)=>{test_numero(e);}).prop("min",0).keyup(function(e){test_numero(e)});   
 }
 /*--------------funcion de tabs------------------------*/
 function change(event,id){
