@@ -95,6 +95,13 @@
                 <div class="tabs2">
                     <button id="modf_inqui" class="btn">Modificar</button>
                     <button id="elim_inqui" class="btn">Eliminar</button>
+                    <input  id="buscador_i" type="text" value="" class="btn" placeholder="Buscar">   
+                    <select id="combo_i" class="btn">
+                        <option class="opt" id="o_ni" value="-" selected>Buscar por</option>
+                        <option class="opt" id="o_n_i" value="nombre">Nombre</option>
+                        <option class="opt" id="o_a_i" value="apellido">Apellido</option>
+                        <option class="opt" id="o_id_i" value="id">Id</option>
+                    </select> 
                 </div>
                 <table border="1" id="clientes" class="table table-striped table-bordered">
                     <thead>
@@ -115,6 +122,13 @@
                 <div class="tabs2">
                     <button id="modf_prop" class="btn">Modificar</button>
                     <button id="elim_prop" class="btn">Eliminar</button>
+                    <input  id="buscador_p" type="text" value="" class="btn" placeholder="Buscar">   
+                    <select id="combo_p" class="btn">
+                        <option class="opt" id="o_np" value="-" selected>Buscar por</option>
+                        <option class="opt" id="o_n_p" value="nombre">Nombre</option>
+                        <option class="opt" id="o_a_p" value="apellido">Apellido</option>
+                        <option class="opt" id="o_id_p" value="id">Id</option>
+                    </select> 
                 </div>
                 <table border="1" id="propietarios" class="table table-striped table-bordered">
                     <thead>
@@ -134,7 +148,7 @@
             <div class ="mensaje">
                 <label id="error"></label>
             </div>
-            <div id="alert_transacciones">
+            <div id="alert_transacciones" title="Eliminar registros asociados">
                 <label id="del_all">Desea eliminar tambien los registros asociados (inquilino y propietario)</label>
                 <button id="si">si</button>
                 <button id="no">no</button>

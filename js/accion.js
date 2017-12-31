@@ -1,5 +1,4 @@
 //falta hacer bien la validacion de cambios y ver que no se repitan los inquilinos
-//hacer que el buscador cambie de tipo dependiendo del combobox
 //carga los componentes y valores
 //variables
 var r="no";
@@ -48,28 +47,6 @@ function set_load()
 {  
     t_nom=false;
     t_numero=false;
-    
-    // /*---------modificar el cuadro de busqueda-------------*/
-    // $("#o_p").click(()=>{
-    //     console.log("le di click we");
-    //     $("#buscador").datepicker("destroy");
-    //     $("#buscador").attr('type','text');
-    // });
-    // $("#o_i").click(()=>{
-    //     $("#buscador").datepicker("destroy");
-    //     $("#buscador").attr("type","text");
-    // });
-    // $("#o_m").click(()=>{
-    //     $("#buscador").datepicker("destroy");
-    //     $("#buscador").attr('type','number');
-    // });
-    // $("#o_id").click(()=>{
-    //     $("#buscador").datepicker("destroy");
-    //     $("#buscador").attr("type","numbre");
-    // });
-    // $("#o_f").click(()=>{
-    //     $("#buscador").datepicker({dateFormat:"yy-mm-dd"});
-    // });
     /*---------------modificar el cuadro de busqueda--------------------*/
     $("#combo").change((e)=>{
             $(".opt").css("background-color","white");
@@ -96,14 +73,49 @@ function set_load()
                 alert("no se selecciono una opcion");
             }
     });
+    $("#combo_i").change((e)=>{
+        $(".opt").css("background-color","white");
+        $(":selected").css("background-color","green");
+        var opcion=$("#combo_i :selected").val();
+        if(opcion=="nombre" || opcion=="apellido")
+        {
+            $("#buscador_i").attr("type","text");
+        }
+        else if(opcion=="id")
+        {
+            $("#buscador_i").attr({'type':'number','min':0,'step':1});
+        }
+        else
+        {
+            alert("no se selecciono una opcion");
+        }
+    });
+    $("#combo_p").change((e)=>{
+        $(".opt").css("background-color","white");
+        $(":selected").css("background-color","green");
+        var opcion=$("#combo_p :selected").val();
+        if(opcion=="nombre" || opcion=="apellido")
+        {
+            $("#buscador_p").attr("type","text");
+        }
+        else if(opcion=="id")
+        {
+            $("#buscador_p").attr({'type':'number','min':0,'step':1});
+        }
+        else
+        {
+            alert("no se selecciono una opcion");
+        }
+    });
     //buscador on type
-    console.log($("#combo option:selected").val());
+    //console.log($("#combo option:selected").val());
+    /*--------buscadores-----------------------------*/
     $("#buscador").keyup((e)=>{
         if($("#combo option:selected").val()!="-")
         {
             $.ajax(
             {
-                data:{"palabra":$("#buscador").val(),"tipo":$("#combo option:selected").val()},
+                data:{"palabra":$("#buscador").val().trim(),"tipo":$("#combo option:selected").val()},
                 url:"php/search.php",
                 type:"POST",
             }).done((e)=>
@@ -117,7 +129,7 @@ function set_load()
         else
         {
             e.preventDefault();
-            alert("no selecciono un tipo de busqueda");
+            alert("seleccione un tipo de busqueda");
             
         }
     }).change((e)=>{
@@ -125,7 +137,7 @@ function set_load()
         {
             $.ajax(
             {
-                data:{"palabra":$("#buscador").val(),"tipo":$("#combo option:selected").val()},
+                data:{"palabra":$("#buscador").val().trim(),"tipo":$("#combo option:selected").val()},
                 url:"php/search.php",
                 type:"POST",
             }).done((e)=>
@@ -138,11 +150,96 @@ function set_load()
         }
         else
         {
-            e.preventDefault();
-            alert("no selecciono un tipo de busqueda");
-            
+            e.preventDefault();            
         }
     });
+    $("#buscador_i").keyup((e)=>{
+        if($("#combo_i option:selected").val()!="-")
+        {
+            $.ajax(
+            {
+                data:{"palabra":$("#buscador_i").val().trim(),"tipo":$("#combo_i option:selected").val()},
+                url:"php/searchi.php",
+                type:"POST",
+            }).done((e)=>
+            {
+                $("#tb_inqui").html(e);
+            }).fail((e)=>
+            {
+                console.log("no se envio");
+            });
+        }
+        else
+        {
+            e.preventDefault();
+            alert("seleccione un tipo de busqueda");
+            
+        }
+    }).change((e)=>{
+        if($("#combo_i option:selected").val()!="-")
+        {
+            $.ajax(
+            {
+                data:{"palabra":$("#buscador_i").val().trim(),"tipo":$("#combo_i option:selected").val()},
+                url:"php/searchi.php",
+                type:"POST",
+            }).done((e)=>
+            {
+                $("#tb_inqui").html(e);
+            }).fail((e)=>
+            {
+                console.log("no se envio");
+            });
+        }
+        else
+        {
+            e.preventDefault();            
+        }
+    });
+    $("#buscador_p").keyup((e)=>{
+        if($("#combo_p option:selected").val()!="-")
+        {
+            $.ajax(
+            {
+                data:{"palabra":$("#buscador_p").val().trim(),"tipo":$("#combo_p option:selected").val()},
+                url:"php/searchp.php",
+                type:"POST",
+            }).done((e)=>
+            {
+                $("#tb_prop").html(e);
+            }).fail((e)=>
+            {
+                console.log("no se envio");
+            });
+        }
+        else
+        {
+            e.preventDefault();
+            alert("seleccione un tipo de busqueda");
+            
+        }
+    }).change((e)=>{
+        if($("#combo_p option:selected").val()!="-")
+        {
+            $.ajax(
+            {
+                data:{"palabra":$("#buscador_p").val().trim(),"tipo":$("#combo_p option:selected").val()},
+                url:"php/searchp.php",
+                type:"POST",
+            }).done((e)=>
+            {
+                $("#tb_prop").html(e);
+            }).fail((e)=>
+            {
+                console.log("no se envio");
+            });
+        }
+        else
+        {
+            e.preventDefault();            
+        }
+    });
+    /*-----eliminar los registros asociados-----*/
     $("#si").click(()=>{
         var f=boton_p("t");
         console.log("se realizo la eliminacion de el inquilino,propietario y transaccion");
@@ -159,6 +256,7 @@ function set_load()
         $("#transaccion").click();
         $("#alert_transacciones").dialog("close");
     });
+    //////////////////////////////////////////////////////////
     $("#datepicker_m").datepicker({dateFormat:"yy-mm-dd"});
     $("#datepicker").datepicker({dateFormat: "yy-mm-dd"});
     $("#ingreso").click((event)=>{change(event,"reg");});
@@ -279,22 +377,6 @@ function set_load()
             {
                 $(".sel").css({"color":"black","font-size":"12px"});
                 $("#alert_transacciones").dialog().css("display","block");
-                console.log($('td[name=id_p]')[f.position].id);
-                console.log($('td[name=id_i]')[f.position].id);
-                // if(si && !($("#alert_transacciones").dialog("isOpen")))
-                // {
-                //     console.log("se realizo");
-                //     delQuery(f.id,"transaccion","delete");
-                //     delQuery($('td[name=id_p]')[f.position].id,"propietario","delete");
-                //     delQuery($('td[name=id_i]')[f.position].id,"inquilino","delete");
-                //     si=false;
-                // }
-                // else
-                // {
-                //     console.log("no se realizo");
-                //     delQuery(f.id,"transaccion","delete");
-                // }
-                // $("#transaccion").click();
             }
             else
             {
@@ -312,6 +394,8 @@ function set_load()
         visible("disp_i");
         llenar(2,"#tb_inqui");
         change(event,"cli");
+        $("#combo_i").prop("selectedIndex",0);
+        $("#buscador_i").val("");
     });
     /*--------modificar tabla de inquilino------------*/
     $("#modf_inqui").click((e)=>{
@@ -359,6 +443,8 @@ function set_load()
         visible("disp_p");
         llenar(1,"#tb_prop");
         change(event,"pro");   
+        $("#combo_p").prop("selectedIndex",0);
+        $("#buscador_p").val("");
     });
     /*-----------modificar los campos de propietario------------------*/
     $("#modf_prop").click((e)=>{
