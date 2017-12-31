@@ -8,6 +8,10 @@
     {
         die("fallo en la coneccion: "+$conn->conenct_error);
     }
+    if(!preg_match('/^[a-zA-Z0-9, ]*$/',$_POST['palabra']))
+    {
+        die("busqueda invalida");
+    }
     $palabra=$_POST['palabra'];
     $tipo=$_POST['tipo'];
     switch($tipo)
