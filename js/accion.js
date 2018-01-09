@@ -1,5 +1,5 @@
 //falta hacer bien la validacion de cambios y ver que no se repitan los inquilinos
-//carga los componentes y valores
+
 //variables
 var r="no";
 var m=null;
@@ -47,6 +47,11 @@ function set_load()
 {  
     t_nom=false;
     t_numero=false;
+    /*-----------------genrer un excel de transacciones--------------------------------------- */
+    $("#export_t").click(function(e) {
+        window.open('data:application/vnd.ms-excel,' + encodeURIComponent($('#registro_transacciones').html()));
+        e.preventDefault();
+    });
     /*---------------modificar el cuadro de busqueda--------------------*/
     $("#combo").change((e)=>{
             $(".opt").css("background-color","white");
@@ -628,7 +633,8 @@ function llenar(tabla,donde){
     });   
 } 
 /*------buscar el registro seleccionado--------*/
-function boton_p(btn){
+function boton_p(btn)
+{
     switch(btn){
         case "t":
             var i=0;

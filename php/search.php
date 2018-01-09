@@ -42,8 +42,8 @@
                     $tabla.= 
                     "<tr id=trt_".$row["ID"].">
                     <td>".$row["ID"]."</td>
-                    <td id='".$row['ID_P']."' name='id_p'>".$row["NP"]." ".$row["AP"]."</td>
-                    <td id='".$row['ID_I']."' name='id_i'>".$row["NI"]." ".$row["AI"]."</td>
+                    <td id='".$row['ID_P']."' name='id_p'>".$row["NP"]."</td><td> ".$row["AP"]."</td>
+                    <td id='".$row['ID_I']."' name='id_i'>".$row["NI"]."</td><td> ".$row["AI"]."</td>
                     <td>$ ".$row["M"]."</td>
                     <td>".$row["F"]."</td>
                     <td class='col-s mr-auto'>
@@ -85,8 +85,8 @@
                     $tabla.= 
                     "<tr id=trt_".$row["ID"].">
                     <td>".$row["ID"]."</td>
-                    <td id='".$row['ID_P']."' name='id_p'>".$row["NP"]." ".$row["AP"]."</td>
-                    <td id='".$row['ID_I']."' name='id_i'>".$row["NI"]." ".$row["AI"]."</td>
+                    <td id='".$row['ID_P']."' name='id_p'>".$row["NP"]."</td><td> ".$row["AP"]."</td>
+                    <td id='".$row['ID_I']."' name='id_i'>".$row["NI"]."</td><td> ".$row["AI"]."</td>
                     <td>$ ".$row["M"]."</td>
                     <td>".$row["F"]."</td>
                     <td class='col-s mr-auto'>
@@ -131,8 +131,8 @@
                         $tabla.= 
                         "<tr id=trt_".$row["ID"].">
                         <td>".$row["ID"]."</td>
-                        <td id='".$row['ID_P']."' name='id_p'>".$row["NP"]." ".$row["AP"]."</td>
-                        <td id='".$row['ID_I']."' name='id_i'>".$row["NI"]." ".$row["AI"]."</td>
+                        <td id='".$row['ID_P']."' name='id_p'>".$row["NP"]."</td><td> ".$row["AP"]."</td>
+                        <td id='".$row['ID_I']."' name='id_i'>".$row["NI"]."</td><td>".$row["AI"]."</td>
                         <td>$ ".$row["M"]."</td>
                         <td>".$row["F"]."</td>
                         <td class='col-s mr-auto'>
@@ -179,8 +179,8 @@
                     $tabla.= 
                     "<tr id=trt_".$row["ID"].">
                     <td>".$row["ID"]."</td>
-                    <td id='".$row['ID_P']."' name='id_p'>".$row["NP"]." ".$row["AP"]."</td>
-                    <td id='".$row['ID_I']."' name='id_i'>".$row["NI"]." ".$row["AI"]."</td>
+                    <td id='".$row['ID_P']."' name='id_p'>".$row["NP"]."</td><td> ".$row["AP"]."</td>
+                    <td id='".$row['ID_I']."' name='id_i'>".$row["NI"]."</td><td> ".$row["AI"]."</td>
                     <td>$ ".$row["M"]."</td>
                     <td>".$row["F"]."</td>
                     <td class='col-s mr-auto'>
@@ -225,8 +225,8 @@
                         $tabla.= 
                         "<tr id=trt_".$row["ID"].">
                         <td>".$row["ID"]."</td>
-                        <td id='".$row['ID_P']."' name='id_p'>".$row["NP"]." ".$row["AP"]."</td>
-                        <td id='".$row['ID_I']."' name='id_i'>".$row["NI"]." ".$row["AI"]."</td>
+                        <td id='".$row['ID_P']."' name='id_p'>".$row["NP"]."</td><td>".$row["AP"]."</td>
+                        <td id='".$row['ID_I']."' name='id_i'>".$row["NI"]."</td><td>".$row["AI"]."</td>
                         <td>$ ".$row["M"]."</td>
                         <td>".$row["F"]."</td>
                         <td class='col-s mr-auto'>
