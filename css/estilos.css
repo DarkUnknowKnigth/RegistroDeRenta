@@ -1,7 +1,7 @@
 .tabcontent{
     display: none;
 }
-.formulario_m ,#disp_p ,#disp_i, #disp_t ,#alert_transacciones{
+.formulario_m ,#disp_p ,#disp_i, #disp_t ,#alert_transacciones,#registro_cobros{
     display: none;
 }
 body
@@ -44,23 +44,10 @@ h1
     background-color: #ccc;
 }
 /*termina estilo de las tabs*/
-.botones 
-{
-    margin-top: 60px;
-    margin-left: 120px;
+.btn-group{
+    float: right;
 }
-.boton
-{
-    border: 1px solid #ccc;
-    background-color: #f1f1f1;
-    margin-left: 15px;
-    float: left;
-    outline: none;
-    cursor: pointer;
-    padding: 14px 16px;
-    transition: 0.3s;
-    border-radius: 10%;
-}
+
 h2
 {
     margin-bottom: 0px;
@@ -82,9 +69,6 @@ input
 }
 .formulario
 {
-    
-    width: 600px;
-    height: 400px;
     margin: auto;
     background: black;
     border-radius: 5px;
@@ -103,8 +87,10 @@ table{
     font-size: 12px;
     font-family: Arial;
 }
+#registro_cobros{
+    background-color: black;
+}
 #error{
-    margin-left: 600px;
     color: red;
 }
 .tabs2 button

@@ -93,7 +93,7 @@
                     <td id='".$row['ID_I']."' name='id_i'>".$row["NI"]."</td><td> ".$row["AI"]."</td>
                     <td>$ ".$row["M"]."</td>
                     <td>".$row["F"]."</td>
-                    <td class='col-s mr-auto'>
+                    <td class='col-sm-auto'>
                         <input type= 'radio' class='btnt_m_' name='rowt' value='".$row["ID"]."'>
                     </td>
                     </tr>";

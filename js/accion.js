@@ -5,7 +5,7 @@ var r="no";
 var m=null;
 var ingreso=$("#ingreso");
 var consulta=$("#transaccion");
-var t_numero=false,t_nom=false;
+var t_numero=false,t_nom=false,active_select_inquilino=false,active_select_propietario=false;
 var error=$("#error");
 /*-------------selector de disponibilidad--------------------*/
 function visible(disp)
@@ -46,10 +46,110 @@ function novisible()
 function set_load()
 {  
     t_nom=false;
-    t_numero=false;
+    t_numero=false
+    /*-------decidir si ingresar un inquilino un propietario o ambos--------*/
+    $("#seleccionar_ingresos").click(()=>{
+        $("#registro_cobros").css("display","block");
+        $("#new_or_not").css("display","none");
+        if($("#prop_chk").prop("checked") && $("#inqui_chk").prop("checked"))
+        {
+            $("#np").css("display","none");
+            $("#ap").css("display","none");
+            $("#in").css("display","none");
+            $("#ia").css("display","none");
+            $("#selc_prop").css("display","block");
+            $("#selc_inqui").css("display","block");
+            $.ajax({
+                method:'POST',
+                url:'php/getselect.php',
+                data:{'tabla':'propietario'}
+            }).done((e)=>{
+                $("#selc_prop").html(" <option value='-'>Seleccione un propietario</option>"+e);
+            }).fail((e)=>{
+                console.log("no se pudo cargar la tabla propietario: "+e);
+            });
+            $.ajax({
+                method:'POST',
+                url:'php/getselect.php',
+                data:{'tabla':'inquilino'}
+            }).done((e)=>{
+                $("#selc_inqui").html("<option value='-'>Seleccione un inquilino</option>"+e);
+            }).fail((e)=>{
+                console.log("no se pudo cargar la tabla inquilino: "+e);
+            });
+            active_select_inquilino=true;
+            active_select_propietario=true;
+            console.log("i "+active_select_inquilino+" p "+active_select_propietario);
+        }
+        else if($("#prop_chk").prop("checked") && !$("#inqui_chk").prop("checked"))
+        {
+            
+            $("#np").css("display","none");
+            $("#ap").css("display","none");
+            $("#in").css("display","block");
+            $("#ia").css("display","block");
+            $("#selc_prop").css("display","block");
+            $("#selc_inqui").css("display","none");
+            $.ajax({
+                method:'POST',
+                url:'php/getselect.php',
+                data:{'tabla':'propietario'}
+            }).done((e)=>{
+                $("#selc_prop").html(" <option value='-'>Seleccione un propietario</option>"+e);
+            }).fail((e)=>{
+                console.log("no se pudo cargar la tabla propietario: "+e);
+            });
+            active_select_inquilino=false;
+            active_select_propietario=true;
+        }
+        else if(!$("#prop_chk").prop("checked") && $("#inqui_chk").prop("checked"))
+        {
+            $("#np").css("display","block");
+            $("#ap").css("display","block");
+            $("#in").css("display","none");
+            $("#ia").css("display","none");
+            $("#selc_prop").css("display","none");
+            $("#selc_inqui").css("display","block");
+            $.ajax({
+                method:'POST',
+                url:'php/getselect.php',
+                data:{'tabla':'inquilino'}
+            }).done((e)=>{
+                $("#selc_inqui").html("<option value='-'>Seleccione un inquilino</option>"+e);
+            }).fail((e)=>{
+                console.log("no se pudo cargar la tabla inquilino: "+e);
+            });
+            active_select_inquilino=true;
+            active_select_propietario=false;           
+        }
+        else if(!$("#prop_chk").prop("checked") && !$("#inqui_chk").prop("checked"))
+        {
+            $("#np").css("display","block");
+            $("#ap").css("display","block");
+            $("#in").css("display","block");
+            $("#ia").css("display","block");
+            $("#selc_prop").css("display","none");
+            $("#selc_inqui").css("display","none");
+            active_select_inquilino=false;
+            active_select_propietario=false;
+        }
+        else
+        {
+            console.log("error");   
+        } 
+    });
     /*-----------------genrer un excel de transacciones--------------------------------------- */
-    $("#export_t").click(function(e) {
-        window.open('data:application/vnd.ms-excel,' + encodeURIComponent($('#registro_transacciones').html()));
+    $("#export_t").click((e)=>{
+        window.open('data:application/vnd.ms-excel,'+encodeURIComponent($('#registro_transacciones').html()));
+        console.log(encodeURIComponent($('#registro_transacciones').html()));
+        e.preventDefault();
+    });
+    $("#export_i").click((e)=>{
+        window.open('data:application/vnd.ms-excel,'+encodeURIComponent($("#registro_inquilinos").html()));
+        e.preventDefault();
+    });
+    $("#export_p").click((e)=>{
+        window.open('data:application/vnd.ms-excel,'+encodeURIComponent($("#registro_propietarios").html()));
         e.preventDefault();
     });
     /*---------------modificar el cuadro de busqueda--------------------*/
@@ -264,7 +364,12 @@ function set_load()
     //////////////////////////////////////////////////////////
     $("#datepicker_m").datepicker({dateFormat:"yy-mm-dd"});
     $("#datepicker").datepicker({dateFormat: "yy-mm-dd"});
-    $("#ingreso").click((event)=>{change(event,"reg");});
+    $("#ingreso").click((event)=>{
+        change(event,"reg");
+        $("#error").text("");
+        $("#registro_cobros").css("display","none");
+        $("#new_or_not").css("display","block");
+    });
     //llenado de tablas y mostrar tablas
     /*------------funicon de transaccion------------*/
     $("#transaccion").click((event)=>{
@@ -491,7 +596,19 @@ function set_load()
             e.preventDefault();
         }
     });
-    $("#submit").click((e)=>{(valida_f())?(console.log("se valido")):(e.preventDefault());});
+    $("#submit").click((e)=>{
+        if(active_select_inquilino==false && active_select_propietario==false)
+        {
+            (valida_f())?(console.log("se valido")):(e.preventDefault());
+            $("#ingreso").click();
+        }
+        else
+        {
+            (valida_select())?(console.log("registro valido")):(e.preventDefault());
+            $("#ingreso").click();
+        }
+        
+    });
     $("#reset").click(vaciar);
     $("#monto_m").click((e)=>{test_numero(e);}).prop("min",0).keyup(function(e){test_numero(e)});
     $("#monto").click((e)=>{test_numero(e);}).prop("min",0).keyup(function(e){test_numero(e)});   
@@ -554,7 +671,85 @@ function test_nom(nombre)
         } 
     }
 }
-//validacion de todo el formulario
+//validar los select cuando ya existe un usuario
+function valida_select()
+{
+    if(active_select_inquilino && active_select_propietario)
+    {
+        if($("#selc_prop :selected").val()!="-" && $("#selc_inqui :selected").val()!="-" && t_numero && $("#datepicker").val().length>0)
+        {
+            $.ajax({
+                method:'POST',
+                url:'php/insertmod.php',
+                data:{
+                    "tipo":"tt",
+                    "monto":$("#monto").val(),
+                    "fecha":$("#datepicker").val(),
+                    "idpropietario":$("#selc_prop :selected").val(),
+                    "idinquilino":$("#selc_inqui :selected").val()
+                }
+            }).done((e)=>{
+                error.css("color","green").text("registro exitoso: tt");
+            }).fail((e)=>{
+                error.css("color","red").text("registro fallido: tt");
+            });
+            vaciar();
+        }
+    }
+    else if(active_select_inquilino && !active_select_propietario)
+    {
+        test_nom([$("#np"),$("#ap")]);
+        if($("#selc_inqui :selected").val()!="-" && t_numero && $("#datepicker").val().length>0 && t_nom)
+        {
+            $.ajax({
+                method:'POST',
+                url:'php/insertmod.php',
+                data:{
+                    "tipo":"ft",
+                    "monto":$("#monto").val(),
+                    "fecha":$("#datepicker").val(),
+                    "idinquilino":$("#selc_inqui :selected").val(),
+                    "pnombre":$("#np").val(),
+                    "papellido":$("#ap").val(),
+                }
+            }).done((e)=>{
+                error.css("color","green").text("registro exitoso: ft");
+            }).fail((e)=>{
+                error.css("color","red").text("registro fallido: ft");
+            });
+            vaciar();
+        }
+    }
+    else if(!active_select_inquilino && active_select_propietario)
+    {
+        test_nom([$("#in"),$("#ia")]);
+        if($("#selc_inqui :selected").val()!="-" && t_numero && $("#datepicker").val().length>0 && t_nom)
+        {
+            $.ajax({
+                method:'POST',
+                url:'php/insertmod.php',
+                data:{
+                    "tipo":"tf",
+                    "monto":$("#monto").val(),
+                    "fecha":$("#datepicker").val(),
+                    "idpropietario":$("#selc_prop :selected").val(),
+                    "inombre":$("#in").val(),
+                    "iapellido":$("#ia").val(),
+                }
+            }).done((e)=>{
+                error.css("color","green").text("registro exitoso: tf");
+            }).fail((e)=>{
+                error.css("color","red").text("registro fallido: tf");
+            });
+            vaciar();
+        }
+    }
+    else
+    {
+        console.log("ingreso normal");
+    }
+}
+//validacion de todo el formulario normal
 function valida_f()
 {
     test_nom($(".texto"));
@@ -617,6 +812,8 @@ function vaciar(){
     $("#ia").val("");
     $("#monto").val("");
     $("#datepicker").val("");
+    $("#selc_prop").val("-");
+    $("#selc_inqui").val("-");
 }
 /*---------------mostrar datos ingresados----------*/
 function llenar(tabla,donde){

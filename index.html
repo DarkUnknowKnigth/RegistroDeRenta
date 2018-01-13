@@ -17,26 +17,39 @@
         <div class="bd">
         <div class="tabs">
             <button id="ingreso" class="btn tablinks">Registrar renta</button>
-            <button id="transaccion" class="btn tablinks">Transacciones</button>
-            <button id="inquilino" class="btn tablinks">Inquilinos</button>
             <button id="propietario" class="btn tablinks">Propietarios</button>
+            <button id="inquilino" class="btn tablinks">Inquilinos</button>
+            <button id="transaccion" class="btn tablinks">Transacciones</button>            
         </div>
         <div class="container">
-            <div class="formulario tabcontent" id="reg" >
-                <form id="form1" class="form-horizontal">
-                    <h2>Propietario</h2>
-                    <input type="text" placeholder="Nombre" class="texto" id="np" required>
-                    <input type="text" placeholder="Apellido" class="texto" id="ap" required>
-                    <h2>Inquilino</h2>
-                    <input type="text" placeholder="Nombre" class="texto" id="in" required>
-                    <input type="text" placeholder="Apellido" class="texto" id="ia" required>
-                    <h2>Pago</h2>
-                    <input type="number" placeholder="Monto" id="monto" step="0.01" required>
-                    <input type="text" id="datepicker" placeholder="Fecha">  
-                </form > 
-                <div class="botones">
-                    <input type="submit" value="Registrar" class="boton" id="submit">
-                    <input type="reset" value="Vaciar" class="boton" id="reset">
+            <div class="col-lg-6 formulario tabcontent" id="reg" >
+                <div id="new_or_not">
+                    <h3>Seleccione al Inquilino/Propietario si ya se han ingresado anteriormente</h3>
+                    <label class="form-control"><input type="checkbox" id="prop_chk" >Propietario</label>
+                    <label class="form-control"><input type="checkbox" id="inqui_chk">Inquilino</label>
+                    <!-- <label class="form-control"><input type="checkbox" id="ninguno">Nuevo Propietario y nuevo Inquilino</label> -->
+                    <button class="btn btn-primary" id="seleccionar_ingresos">Listo</button>
+                </div>
+                <div id="registro_cobros">
+                    <form id="form1" class="form-horizontal">
+                        <h2>Propietario</h2>
+                        <input type="text" placeholder="Nombre" class="form-control texto" id="np" required>
+                        <input type="text" placeholder="Apellido" class="form-control texto" id="ap" required>
+                        <select name="mispropietarios" id="selc_prop" class="form-control" required>
+                        </select>
+                        <h2>Inquilino</h2>
+                        <input type="text" placeholder="Nombre" class="form-control texto" id="in" required>
+                        <input type="text" placeholder="Apellido" class="form-control texto" id="ia" required>
+                        <select name="mispropietarios" id="selc_inqui" class="form-control" required>
+                        </select>
+                        <h2>Pago</h2>
+                        <input type="number" placeholder="Monto" id="monto" step="0.01" class="form-control" required>
+                        <input type="text" id="datepicker" placeholder="Fecha" class="form-control">  
+                    </form > 
+                    <div class="btn-group">
+                        <input type="submit" value="Registrar" class="btn btn-primary" id="submit">
+                        <input type="reset" value="Vaciar" class="btn btn-warning" id="reset">
+                    </div>
                 </div>
             </div>
             <div class="formulario_m container" id="form_mod" title="Modificar">
@@ -79,11 +92,11 @@
                     <table border="1" id ="transacciones" class="table table-striped table-bordered">
                             <thead>
                                 <tr>
-                                    <th>Id</th>
-                                    <th colspan="2">Propietario</th>                            
-                                    <th colspan="2">Inquilino</th>
-                                    <th>Monto</th>
-                                    <th>fecha</th>
+                                    <th class="col-sm-auto">Id</th>
+                                    <th colspan="2" class="col-lg-auto">Propietario</th>                            
+                                    <th colspan="2"class="col-lg-auto">Inquilino</th>
+                                    <th class="col-md-auto">Monto</th>
+                                    <th class="col-md-auto">fecha</th>
                                     <th class="sel">seleccionar</th>
                                 </tr>
                                 <tr>
@@ -95,11 +108,9 @@
                                         <th></th>
                                         <th></th>
                                         <th></th>
-        
                                 </tr>
                             </thead>
                             <tbody id="tb_trans">
-        
                             </tbody>
                         </table>
                 </div>                
@@ -117,20 +128,20 @@
                     <input  id="buscador_i" type="text" value="" class="btn" placeholder="Buscar">   
                     <button class="btn" id="export_i">Exportar</button>
                 </div>
-                <table border="1" id="clientes" class="table table-striped table-bordered">
-                    <thead>
-                        <tr>
-                            <th>Id</th>
-                            <th>Nombre</th>
-                            <th>Apellido</th>
-                            <th class="sel">selecionar</th>
-                        </tr>
-                    </thead>
-                    <tbody id="tb_inqui">
-                        
-                    </tbody>
-                </table>
-                
+                <div id="registro_inquilinos">
+                    <table border="1" id="clientes" class="table table-striped table-bordered">
+                        <thead>
+                            <tr>
+                                <th class="col-sm-auto">Id</th>
+                                <th>Nombre</th>
+                                <th>Apellido</th>
+                                <th class="sel col-sm-auto">selecionar</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tb_inqui">
+                        </tbody>
+                    </table>
+                </div>
             </div>
             <div class="query tabcontent container" id="pro">
                 <div class="tabs2">
@@ -145,20 +156,20 @@
                     <input  id="buscador_p" type="text" value="" class="btn" placeholder="Buscar">
                     <button class="btn" id="export_p">Exportar</button>   
                 </div>
-                <table border="1" id="propietarios" class="table table-striped table-bordered">
-                    <thead>
-                        <tr>
-                            <th>Id</th>
-                            <th>Nombre</th>
-                            <th>Apellido</th>
-                            <th class="sel">seleccionar</th>                        
-                        </tr>
-                    </thead>
-                    <tbody id="tb_prop">
-                        
-                    </tbody>
-                </table>
-                
+                <div id="registro_propietarios">
+                    <table border="1" id="propietarios" class="table table-striped table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Nombre</th>
+                                <th>Apellido</th>
+                                <th class="sel">seleccionar</th>                        
+                            </tr>
+                        </thead>
+                        <tbody id="tb_prop">
+                        </tbody>
+                    </table>
+                </div>
             </div>
             <div class ="mensaje">
                 <label id="error"></label>
