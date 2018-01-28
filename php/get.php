@@ -22,12 +22,12 @@
                 {
                     $tabla.= 
                     "<tr id=trp_".$row["idpropietario"].">
+                    <td class='col-auto sel'>
+                    <input type= 'radio' class='btnp_m_' name='rowp' value='".$row["idpropietario"]."'>
+                    </td>
                     <td>".$row["idpropietario"]."</td>
                     <td>".$row["nombre"]."</td>
                     <td>".$row["apellido"]."</td>
-                    <td class="."col-auto mr-auto".">
-                        <input type= 'radio' class='btnp_m_' name='rowp' value='".$row["idpropietario"]."'>
-                    </td>
                     </tr>";
                 }
                 echo $tabla;
@@ -49,12 +49,12 @@
                 {
                     $tabla.= 
                     "<tr id=tri_".$row["idinquilino"].">
+                    <td class='col-auto sel'>
+                        <input type= 'radio' class='btni_m_ ' name='rowi' value='".$row["idinquilino"]."'>
+                    </td>
                     <td>".$row["idinquilino"]."</td>
                     <td>".$row["nombre"]."</td>
                     <td>".$row["apellido"]."</td>
-                    <td>
-                        <input type= 'radio' class='btni_m_ ' name='rowi' value='".$row["idinquilino"]."'>
-                    </td>
                     </tr>";
                 }
                 echo $tabla;
@@ -86,16 +86,16 @@
                 // output data of each row
                 while($row = $result->fetch_assoc()) 
                 {
-                    $tabla.= 
-                    "<tr id=trt_".$row["ID"].">
-                    <td>".$row["ID"]."</td>
-                    <td id='".$row['ID_P']."' name='id_p'>".$row["NP"]."</td><td> ".$row["AP"]."</td>
-                    <td id='".$row['ID_I']."' name='id_i'>".$row["NI"]."</td><td> ".$row["AI"]."</td>
-                    <td>$ ".$row["M"]."</td>
-                    <td>".$row["F"]."</td>
-                    <td class='col-sm-auto'>
+                    $tabla.= "
+                    <tr id=trt_".$row["ID"].">
+                        <td class='col-auto sel'>
                         <input type= 'radio' class='btnt_m_' name='rowt' value='".$row["ID"]."'>
-                    </td>
+                        </td>
+                        <td>".$row["ID"]."</td>
+                        <td id='".$row['ID_P']."' name='id_p'>".$row["NP"]."</td><td> ".$row["AP"]."</td>
+                        <td id='".$row['ID_I']."' name='id_i'>".$row["NI"]."</td><td> ".$row["AI"]."</td>
+                        <td>$ ".$row["M"]."</td>
+                        <td>".$row["F"]."</td>
                     </tr>";
                 }
                 echo $tabla;

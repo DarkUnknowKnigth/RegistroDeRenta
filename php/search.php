@@ -41,14 +41,14 @@
                 {
                     $tabla.= 
                     "<tr id=trt_".$row["ID"].">
+                    <td class='col-s mr-auto sel'>
+                    <input type= 'radio' class='btnt_m_' name='rowt' value='".$row["ID"]."'>
+                    </td>
                     <td>".$row["ID"]."</td>
                     <td id='".$row['ID_P']."' name='id_p'>".$row["NP"]."</td><td> ".$row["AP"]."</td>
                     <td id='".$row['ID_I']."' name='id_i'>".$row["NI"]."</td><td> ".$row["AI"]."</td>
                     <td>$ ".$row["M"]."</td>
                     <td>".$row["F"]."</td>
-                    <td class='col-s mr-auto'>
-                        <input type= 'radio' class='btnt_m_' name='rowt' value='".$row["ID"]."'>
-                    </td>
                     </tr>";
                 }
                 echo $tabla;
@@ -84,14 +84,14 @@
                 {
                     $tabla.= 
                     "<tr id=trt_".$row["ID"].">
+                    <td class='col-s mr-auto sel'>
+                        <input type= 'radio' class='btnt_m_' name='rowt' value='".$row["ID"]."'>
+                    </td>
                     <td>".$row["ID"]."</td>
                     <td id='".$row['ID_P']."' name='id_p'>".$row["NP"]."</td><td> ".$row["AP"]."</td>
                     <td id='".$row['ID_I']."' name='id_i'>".$row["NI"]."</td><td> ".$row["AI"]."</td>
                     <td>$ ".$row["M"]."</td>
                     <td>".$row["F"]."</td>
-                    <td class='col-s mr-auto'>
-                        <input type= 'radio' class='btnt_m_' name='rowt' value='".$row["ID"]."'>
-                    </td>
                     </tr>";
                 }
                 echo $tabla;
@@ -130,14 +130,14 @@
                     {
                         $tabla.= 
                         "<tr id=trt_".$row["ID"].">
+                        <td class='col-s mr-auto sel'>
+                        <input type= 'radio' class='btnt_m_' name='rowt' value='".$row["ID"]."'>
+                        </td>
                         <td>".$row["ID"]."</td>
                         <td id='".$row['ID_P']."' name='id_p'>".$row["NP"]."</td><td> ".$row["AP"]."</td>
                         <td id='".$row['ID_I']."' name='id_i'>".$row["NI"]."</td><td>".$row["AI"]."</td>
                         <td>$ ".$row["M"]."</td>
                         <td>".$row["F"]."</td>
-                        <td class='col-s mr-auto'>
-                            <input type= 'radio' class='btnt_m_' name='rowt' value='".$row["ID"]."'>
-                        </td>
                         </tr>";
                     }
                     echo $tabla;
@@ -178,14 +178,14 @@
                 {
                     $tabla.= 
                     "<tr id=trt_".$row["ID"].">
+                    <td class='col-s mr-auto sel'>
+                    <input type= 'radio' class='btnt_m_' name='rowt' value='".$row["ID"]."'>
+                    </td>
                     <td>".$row["ID"]."</td>
                     <td id='".$row['ID_P']."' name='id_p'>".$row["NP"]."</td><td> ".$row["AP"]."</td>
                     <td id='".$row['ID_I']."' name='id_i'>".$row["NI"]."</td><td> ".$row["AI"]."</td>
                     <td>$ ".$row["M"]."</td>
                     <td>".$row["F"]."</td>
-                    <td class='col-s mr-auto'>
-                        <input type= 'radio' class='btnt_m_' name='rowt' value='".$row["ID"]."'>
-                    </td>
                     </tr>";
                 }
                 echo $tabla;
@@ -224,14 +224,14 @@
                     {
                         $tabla.= 
                         "<tr id=trt_".$row["ID"].">
+                        <td class='col-s mr-auto sel'>
+                            <input type= 'radio' class='btnt_m_' name='rowt' value='".$row["ID"]."'>
+                        </td>
                         <td>".$row["ID"]."</td>
                         <td id='".$row['ID_P']."' name='id_p'>".$row["NP"]."</td><td>".$row["AP"]."</td>
                         <td id='".$row['ID_I']."' name='id_i'>".$row["NI"]."</td><td>".$row["AI"]."</td>
                         <td>$ ".$row["M"]."</td>
                         <td>".$row["F"]."</td>
-                        <td class='col-s mr-auto'>
-                            <input type= 'radio' class='btnt_m_' name='rowt' value='".$row["ID"]."'>
-                        </td>
                         </tr>";
                     }
                     echo $tabla;

@@ -1,5 +1,5 @@
-//falta hacer bien la validacion de cambios y ver que no se repitan los inquilinos
-
+//expoetar a pdf...
+//http://anexsoft.com/p/62/exportar-html-a-pdf-en-php-de-manera-facil#
 //variables
 var r="no";
 var m=null;
@@ -48,9 +48,8 @@ function set_load()
     t_nom=false;
     t_numero=false
     /*-------decidir si ingresar un inquilino un propietario o ambos--------*/
-    $("#seleccionar_ingresos").click(()=>{
-        $("#registro_cobros").css("display","block");
-        $("#new_or_not").css("display","none");
+    //$("#seleccionar_ingresos").click(()=>
+    function status_select(){
         if($("#prop_chk").prop("checked") && $("#inqui_chk").prop("checked"))
         {
             $("#np").css("display","none");
@@ -137,20 +136,62 @@ function set_load()
         {
             console.log("error");   
         } 
-    });
+    }
+    $("#prop_chk").change(status_select);
+    $("#inqui_chk").change(status_select);
     /*-----------------genrer un excel de transacciones--------------------------------------- */
-    $("#export_t").click((e)=>{
+    $("#t_pdf").click((e)=>{
+        $("#t_excel").css("display","none");
+        $("#t_pdf").css("display","none");
+        $("#export_t").css("display","block");
+    });
+    $("#t_excel").click((e)=>{
+        $("#t_excel").css("display","none");
+        $("#t_pdf").css("display","none");
+        $("#export_t").css("display","block");
         window.open('data:application/vnd.ms-excel,'+encodeURIComponent($('#registro_transacciones').html()));
-        console.log(encodeURIComponent($('#registro_transacciones').html()));
         e.preventDefault();
     });
-    $("#export_i").click((e)=>{
+
+     $("#export_t").click((e)=>{
+        $("#export_t").css("display","none");
+        $("#t_excel").css("display","block");
+        $("#t_pdf").css("display","block");
+       
+    });
+    $("#i_pdf").click((e)=>{
+        $("#i_excel").css("display","none");
+        $("#i_pdf").css("display","none");
+        $("#export_i").css("display","block");
+    });
+    $("#i_excel").click((e)=>{
+        $("#i_excel").css("display","none");
+        $("#i_pdf").css("display","none");
+        $("#export_i").css("display","block");
         window.open('data:application/vnd.ms-excel,'+encodeURIComponent($("#registro_inquilinos").html()));
         e.preventDefault();
     });
-    $("#export_p").click((e)=>{
+    $("#export_i").click((e)=>{
+        $("#export_i").css("display","none");
+        $("#i_excel").css("display","block");
+        $("#i_pdf").css("display","block");
+    });
+    $("#p_pdf").click((e)=>{
+        $("#p_excel").css("display","none");
+        $("#p_pdf").css("display","none");
+        $("#export_p").css("display","block");
+    });
+    $("#p_excel").click((e)=>{
+        $("#p_excel").css("display","none");
+        $("#p_pdf").css("display","none");
+        $("#export_p").css("display","block");
         window.open('data:application/vnd.ms-excel,'+encodeURIComponent($("#registro_propietarios").html()));
         e.preventDefault();
+    });
+    $("#export_p").click((e)=>{
+        $("#export_p").css("display","none");
+        $("#p_excel").css("display","block");
+        $("#p_pdf").css("display","block");
     });
     /*---------------modificar el cuadro de busqueda--------------------*/
     $("#combo").change((e)=>{
@@ -367,8 +408,8 @@ function set_load()
     $("#ingreso").click((event)=>{
         change(event,"reg");
         $("#error").text("");
-        $("#registro_cobros").css("display","none");
-        $("#new_or_not").css("display","block");
+        status_select();
+
     });
     //llenado de tablas y mostrar tablas
     /*------------funicon de transaccion------------*/
@@ -383,9 +424,9 @@ function set_load()
     });
     /*-------modificar tabla de transaccion------*/
     $("#modf_trans").click((e)=>{ 
+        $(".sel").show();
         //solicitar el id del campo selecionado
         var f=boton_p("t");
-        console.log(f)
         if(f==undefined)
         {
             $(".sel").css({"color":"red","font-size":"15px"});
@@ -394,8 +435,6 @@ function set_load()
         else
         {    
             var consulta="";
-            console.log("estoy adentro");
-            console.log(f);
             //sacar los datos de la bd en u json
             if(f.id!=undefined)
             {
@@ -475,6 +514,7 @@ function set_load()
     });
     /*-----------eliminar una transaccion ----------*/
     $("#elim_trans").click((e)=>{
+        $(".sel").show();
         var f=boton_p("t");
         if(f==undefined)
         {
@@ -496,7 +536,9 @@ function set_load()
         }
     });
     /*--------cancelar la modificacion de la transaccion----------*/
-    $("#cancelar_m").click(()=>$("#form_mod").dialog("close"));
+    $("#cancelar_m").click(()=>{
+        $("#form_mod").dialog("close");
+    });
     /*--------- funcion de inquilino-----------*/
     $("#inquilino").click((event)=>{
         novisible();
@@ -510,6 +552,7 @@ function set_load()
     /*--------modificar tabla de inquilino------------*/
     $("#modf_inqui").click((e)=>{
         //solicitar el id del campo selecionado
+        $(".sel").show();
         var id=boton_p("i");
         var consulta="";
         //sacar los datos de la bd en un json
@@ -534,6 +577,7 @@ function set_load()
     });
     /*---------eliminar a un inquilino----------------*/
     $("#elim_inqui").click((e)=>{
+        $(".sel").show();
         var id=boton_p("i");
         if(id!=undefined)
         {
@@ -558,6 +602,7 @@ function set_load()
     });
     /*-----------modificar los campos de propietario------------------*/
     $("#modf_prop").click((e)=>{
+        $(".sel").show();
         //solicitar el id del campo selecionado
         var id=boton_p("p");
         var consulta="";
@@ -583,6 +628,7 @@ function set_load()
     });
     /*-----------borrar un propietario-------------------*/
     $("#elim_prop").click((e)=>{
+        $(".sel").show();
         var id=boton_p("p");
         if(id!=undefined)
         {
@@ -599,13 +645,28 @@ function set_load()
     $("#submit").click((e)=>{
         if(active_select_inquilino==false && active_select_propietario==false)
         {
-            (valida_f())?(console.log("se valido")):(e.preventDefault());
-            $("#ingreso").click();
+            if(valida_f())
+            {
+                console.log("registro valido: ff");
+                $("#ingreso").click();
+            }
+            else
+            {
+                e.preventDefault();
+                
+            }
         }
         else
         {
-            (valida_select())?(console.log("registro valido")):(e.preventDefault());
-            $("#ingreso").click();
+            if(valida_select())
+            {
+                console.log("registro valido: tt,tf,ft");
+                $("#ingreso").click();
+            }
+            else
+            {
+                e.preventDefault();
+            }
         }
         
     });
@@ -694,6 +755,12 @@ function valida_select()
                 error.css("color","red").text("registro fallido: tt");
             });
             vaciar();
+            return true;
+        }
+        else
+        {
+            error.text("Campos invalidos").css("color","red");
+            return false;
         }
     }
     else if(active_select_inquilino && !active_select_propietario)
@@ -718,12 +785,18 @@ function valida_select()
                 error.css("color","red").text("registro fallido: ft");
             });
             vaciar();
+            return true;
+        }
+        else
+        {
+            error.text("Campos invalidos").css("color","red");
+            return false;
         }
     }
     else if(!active_select_inquilino && active_select_propietario)
     {
         test_nom([$("#in"),$("#ia")]);
-        if($("#selc_inqui :selected").val()!="-" && t_numero && $("#datepicker").val().length>0 && t_nom)
+        if($("#selc_prop :selected").val()!="-" && t_numero && $("#datepicker").val().length>0 && t_nom)
         {
             $.ajax({
                 method:'POST',
@@ -742,11 +815,18 @@ function valida_select()
                 error.css("color","red").text("registro fallido: tf");
             });
             vaciar();
+           return true;
+        }
+        else
+        {
+            error.text("Campos invalidos").css("color","red");
+            return false;
         }
     }
     else
     {
         console.log("ingreso normal");
+        return false;
     }
 }
 //validacion de todo el formulario normal
@@ -814,6 +894,8 @@ function vaciar(){
     $("#datepicker").val("");
     $("#selc_prop").val("-");
     $("#selc_inqui").val("-");
+    $("#prop_chk").prop("checked",0);
+    $("#inqui_chk").prop("checked",0);
 }
 /*---------------mostrar datos ingresados----------*/
 function llenar(tabla,donde){
@@ -823,6 +905,7 @@ function llenar(tabla,donde){
         type:'POST',
         success: (respuesta)=>{
             $(donde).html(respuesta);
+            $(".sel").hide();
         },
         error: (respuesta)=>{
             error.html("no se puedo realizar la consulta");

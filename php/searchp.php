@@ -27,12 +27,12 @@
                 {
                     $tabla.= 
                     "<tr id=trp_".$row["idpropietario"].">
-                    <td>".$row["idpropietario"]."</td>
-                    <td>".$row["nombre"]."</td>
-                    <td>".$row["apellido"]."</td>
                     <td class="."col-auto mr-auto".">
                         <input type= 'radio' class='btnp_m_' name='rowp' value='".$row["idpropietario"]."'>
                     </td>
+                    <td>".$row["idpropietario"]."</td>
+                    <td>".$row["nombre"]."</td>
+                    <td>".$row["apellido"]."</td>
                     </tr>";
                 }
                 echo $tabla;
@@ -54,12 +54,12 @@
                 {
                     $tabla.= 
                     "<tr id=trp_".$row["idpropietario"].">
-                    <td>".$row["idpropietario"]."</td>
-                    <td>".$row["nombre"]."</td>
-                    <td>".$row["apellido"]."</td>
                     <td class="."col-auto mr-auto".">
                         <input type= 'radio' class='btnp_m_' name='rowp' value='".$row["idpropietario"]."'>
                     </td>
+                    <td>".$row["idpropietario"]."</td>
+                    <td>".$row["nombre"]."</td>
+                    <td>".$row["apellido"]."</td>
                     </tr>";
                 }
                 echo $tabla;
@@ -84,12 +84,12 @@
                     {
                         $tabla.= 
                         "<tr id=tri_".$row["idpropietario"].">
-                        <td>".$row["idpropietario"]."</td>
-                        <td>".$row["nombre"]."</td>
-                        <td>".$row["apellido"]."</td>
                         <td>
                             <input type= 'radio' class='btni_m_ ' name='rowi' value='".$row["idpropietario"]."'>
                         </td>
+                        <td>".$row["idpropietario"]."</td>
+                        <td>".$row["nombre"]."</td>
+                        <td>".$row["apellido"]."</td>
                         </tr>";
                     }
                     echo $tabla;

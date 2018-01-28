@@ -31,12 +31,12 @@
                 {
                     $tabla.= 
                     "<tr id=tri_".$row["ID"].">
-                    <td>".$row["ID"]."</td>
-                    <td>".$row["NI"]."</td>
-                    <td>".$row["AI"]."</td>
                     <td>
                         <input type= 'radio' class='btni_m_ ' name='rowi' value='".$row["ID"]."'>
                     </td>
+                    <td>".$row["ID"]."</td>
+                    <td>".$row["NI"]."</td>
+                    <td>".$row["AI"]."</td>
                     </tr>";
                 }
                 echo $tabla;
@@ -63,12 +63,12 @@
                 {
                     $tabla.= 
                     "<tr id=tri_".$row["ID"].">
+                    <td>
+                    <input type= 'radio' class='btni_m_ ' name='rowi' value='".$row["ID"]."'>
+                    </td>
                     <td>".$row["ID"]."</td>
                     <td>".$row["NI"]."</td>
                     <td>".$row["AI"]."</td>
-                    <td>
-                        <input type= 'radio' class='btni_m_ ' name='rowi' value='".$row["ID"]."'>
-                    </td>
                     </tr>";
                 }
                 echo $tabla;
@@ -98,12 +98,12 @@
                     {
                         $tabla.= 
                         "<tr id=tri_".$row["ID"].">
-                        <td>".$row["ID"]."</td>
-                        <td>".$row["NI"]."</td>
-                        <td>".$row["AI"]."</td>
                         <td>
                             <input type= 'radio' class='btni_m_ ' name='rowi' value='".$row["ID"]."'>
                         </td>
+                        <td>".$row["ID"]."</td>
+                        <td>".$row["NI"]."</td>
+                        <td>".$row["AI"]."</td>
                         </tr>";
                     }
                     echo $tabla;
